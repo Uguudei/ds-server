@@ -1,0 +1,103 @@
+# update ubuntu
+sudo apt-get upgdate
+apt list --upgradable
+sudo apt upgrade
+sudo reboot
+
+
+# install anaconda on ubuntu-18-04-quickstart
+https://www.digitalocean.com/community/tutorials/how-to-install-anaconda-on-ubuntu-18-04-quickstart
+
+cd /tmp
+curl - O https://repo.anaconda.com/miniconda/Miniconda3-4.5.12-Linux-x86_64.sh
+bash Miniconda3-4.5.12-Linux-x86_64.sh
+# 	export 'PATH="~/anaconda3/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+
+
+# make virtual environment for each library
+conda create --name pytorch11 python=3.7
+# make kernel for env
+source activate pytorch11
+conda install pip
+# conda install nb_conda_kernels 	# may need to install
+conda install ipykernel # or pip install ipykernel
+source activate pytorch11
+python -m ipykernel install --user --name pytorch11 --display-name "Pytorch11 Py37"
+https://ipython.readthedocs.io/en/latest/install/kernel_install.html
+
+
+
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+sudo apt-get install -y nodejs
+# sudo apt-get -y install npm nodejs
+sudo apt-get install -y build-essential
+npm install -g configurable-http-proxy
+pip3 install jupyterhub
+pip3 install --upgrade notebook
+
+mkdir /etc/jupyterhub
+jupyterhub --generate-config -f /etc/jupyterhub/jupyterhub_config.py
+
+
+curl https://raw.githubusercontent.com/jupyterhub/the-littlest-jupyterhub/master/bootstrap/bootstrap.py | sudo -E python3 - --admin uguudei
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+   Using TLJH
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+sudo apt install python3 git curl
+curl https://raw.githubusercontent.com/jupyterhub/the-littlest-jupyterhub/master/bootstrap/bootstrap.py | sudo -E python3 - --admin <admin-user-name>
+
+# creating environment
+export PATH=/opt/tljh/user/bin:${PATH}
+sudo PATH=${PATH} conda create --name pytorch11 python=3.7
+conda activate pytorch11
+sudo -E conda install pip
+sudo -E conda install ipykernel # or pip install ipykernel
+
+# installing kernel
+conda activate pytorch11
+sudo -E python -m ipykernel install --name pytorch11 --display-name "Pytorch11 Py37"
+
+# list kernels
+sudo jupyter kernelspec list
+# remove kernel
+sudo jupyter kernelspec uninstall tensorflow
+
+# installing to envs
+sudo -E conda install networkx
+
+
+
+# configuring oracle global variable in 
+cd etc
+vi bash.bashrc
+export LD_LIBRARY_PATH=/usr/lib/oracle/12.2/client64/lib
+
+# configuring oracle for jupyterhub
+LD_LIBRARY_PATH=/usr/lib/oracle/12.2/client64/lib
+https://github.com/jupyterhub/the-littlest-jupyterhub/issues/308
+
+# create network/admin folder and create tnsnames.ora
+ORACLE_HOME=/usr/lib/oracle/12.2/client64
+TNS_ADMIN=/usr/lib/oracle/12.2/client64/network/admin
+# add them to following
+https://github.com/jupyterhub/the-littlest-jupyterhub/issues/308
+
+
+
+
+
+# Permit ssh as root user
+sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+
+
+
+
+TLJH config:
+# whitelist kernel
+c.KernelSpecManager.whitelist = {'julia-0.6', 'cling'}
