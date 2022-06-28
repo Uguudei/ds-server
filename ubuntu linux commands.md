@@ -39,3 +39,20 @@ stat -c "%a %n" ~/file.html
 # List folder permissions
 stat -c "%a %n" ~/directory/
 ```
+
+## Previously used commands
+
+Fix error `permission denied, mkdir '/tmp/vsch'` in vscode remote-release
+```bash
+# Change owner group of directory into public-data /public-data has all our members/
+sudo chown -R uguudei:public-data /tmp/vsch
+
+# Make new directory and files inheret parent directory group permission
+sudo chmod 02775 /tmp/vsch
+```
+
+### If the problem still exist, enter following command
+
+```bash
+sudo chmod 02775 /tmp/vsch/container-features
+```
